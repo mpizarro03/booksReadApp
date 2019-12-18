@@ -40,21 +40,19 @@ class ViewBooksToReadScreen extends Component {
     } catch (err) {
       console.log('error: ', err);
     }
-    console.log('state is:', this.state.books);
   }
   render() {
     const booksList = this.state.books.books;
-    console.log('state:', this.state.books.books);
-    console.log('list:', booksList);
     return (
       <>
         <View style={styles.container}>
           <FlatList
+            style={styles.body}
             data={booksList}
             renderItem={({item}) => (
-              <View>
+              <View style={styles.listItemCard}>
                 <Text style={styles.item}>{item.title}</Text>
-                <Text style={styles.item}>by: {item.author}</Text>
+                <Text style={styles.item}>By: {item.author}</Text>
               </View>
             )}
           />
@@ -66,12 +64,34 @@ class ViewBooksToReadScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
+    flexDirection: 'row',
+    paddingTop: 10,
+  },
+  body: {
+    padding: 20,
+  },
+  listItemCard: {
+    flexDirection: 'column',
+    height: 90,
+    padding: 15,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    borderRadius: 2,
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
   },
   item: {
+    color: 'black',
     padding: 10,
     fontSize: 18,
-    height: 44,
+    height: 30,
   },
 });
 
