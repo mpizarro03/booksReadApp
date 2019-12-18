@@ -1,0 +1,27 @@
+{
+	"api": {
+		"booksReadApp": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"description": "booksReadAPIKey",
+							"apiKeyExpirationDays": "365"
+						}
+					}
+				}
+			}
+		}
+	},
+	"auth": {
+		"booksreadappde475186": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
