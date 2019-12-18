@@ -5,7 +5,7 @@ export const getBook = `query GetBook($id: ID!) {
   getBOOK(id: $id) {
     id
     title
-    autor
+    author
     status
   }
 }
@@ -19,7 +19,7 @@ export const listBooKs = `query ListBooKs(
     items {
       id
       title
-      autor
+      author
       status
     }
     nextToken
