@@ -14,6 +14,23 @@ const AddBook = `mutation ($title: String! $author: String $status: String!) {
 }
 `;
 
+const ListBooksToRead = `query ListBooKs(
+  $filter: ModelBOOKFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBOOKs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      author
+      status
+    }
+    nextToken
+  }
+}
+`;
+
 class AddBooksScreen extends Component {
   static navigationOptions = {
     title: 'Add a book',
@@ -24,6 +41,7 @@ class AddBooksScreen extends Component {
     author: '',
     status: 'notRead',
     isValid: false,
+    displayBooksToRead: false,
   };
 
   onChangeText = (key, val) => {
@@ -34,6 +52,7 @@ class AddBooksScreen extends Component {
     this.setState(prevState => ({
       title: {...prevState.title, title: ''},
       author: {...prevState.author, author: ''},
+      isValid: {...prevState.isValid, isvalid: false},
     }));
   };
 
@@ -60,9 +79,28 @@ class AddBooksScreen extends Component {
     }
   }
 
+  async componentDidMount() {
+    try {
+      const books = await API.graphql(graphqlOperation(ListBooksToRead));
+      const booksList = books.data.listBOOKs.items.length > 0 ? true : false;
+      console.log('books:', booksList);
+      if (booksList) {
+        this.setState(prevState => ({
+          displayBooksToRead: {
+            ...prevState.displayBooksToRead,
+            displayBooksToRead: true,
+          },
+        }));
+      }
+    } catch (err) {
+      console.log('error: ', err);
+    }
+  }
+
   render() {
     const {navigate} = this.props.navigation;
-    const {isValid} = this.state;
+    const {isValid, displayBooksToRead} = this.state;
+    console.log('display:', displayBooksToRead);
     return (
       <>
         <View style={styles.container}>
@@ -95,6 +133,20 @@ class AddBooksScreen extends Component {
             disabled={!isValid}>
             Add Book
           </Button>
+          {displayBooksToRead && (
+            <Button
+              style={{fontSize: 20, color: 'white'}}
+              containerStyle={{
+                padding: 20,
+                margin: 30,
+                overflow: 'hidden',
+                borderRadius: 4,
+                backgroundColor: 'blue',
+              }}
+              onPress={() => navigate('ViewBooksToRead')}>
+              Books To Read
+            </Button>
+          )}
         </View>
       </>
     );
