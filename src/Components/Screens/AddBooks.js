@@ -1,6 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import Button from 'react-native-button';
+import API, {graphqlOperation} from '@aws-amplify/api';
+
+const AddBook = `mutation ($title: String! $author: String $status: String!) {
+  createBOOK(input: {
+    title: $title
+    author: $author
+    status: $status
+  }) {
+    id title author status
+  }
+}
+`;
 
 class AddBooksScreen extends Component {
   static navigationOptions = {
@@ -11,7 +23,6 @@ class AddBooksScreen extends Component {
     title: '',
     author: '',
     status: 'notRead',
-    books: [],
     isValid: false,
   };
 
@@ -19,9 +30,29 @@ class AddBooksScreen extends Component {
     this.setState({[key]: val});
   };
 
+  clearForm = () => {
+    this.setState(prevState => ({
+      title: {...prevState.title, title: ''},
+      author: {...prevState.author, author: ''},
+    }));
+  };
+
+  addBook = async () => {
+    const {title, author} = this.state;
+    if (title === '' || author === ' ') return;
+    const book = {title: title, author: author, status: 'notRead'};
+    try {
+      await API.graphql(graphqlOperation(AddBook, book));
+      this.clearForm();
+      console.log('success');
+    } catch (err) {
+      console.log('error:', err);
+    }
+  };
+
   componentDidUpdate(prevState) {
     const {title, author, isValid} = this.state;
-    console.log('titel', title, 'author', author);
+
     if (title.length > 0 && author.length > 0 && isValid === false) {
       this.setState(prevState => ({
         isValid: {...prevState.isValid, isValid: true},
@@ -56,7 +87,7 @@ class AddBooksScreen extends Component {
               borderRadius: 4,
               backgroundColor: 'blue',
             }}
-            onPress={() => alert('Success!')}
+            onPress={this.addBook}
             styleDisabled={{color: 'white'}}
             disabledContainerStyle={{
               backgroundColor: 'lightgrey',

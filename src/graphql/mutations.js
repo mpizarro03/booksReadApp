@@ -8,7 +8,7 @@ export const createBook = `mutation CreateBook(
   createBOOK(input: $input, condition: $condition) {
     id
     title
-    autor
+    author
     status
   }
 }
@@ -20,7 +20,7 @@ export const updateBook = `mutation UpdateBook(
   updateBOOK(input: $input, condition: $condition) {
     id
     title
-    autor
+    author
     status
   }
 }
@@ -32,7 +32,7 @@ export const deleteBook = `mutation DeleteBook(
   deleteBOOK(input: $input, condition: $condition) {
     id
     title
-    autor
+    author
     status
   }
 }

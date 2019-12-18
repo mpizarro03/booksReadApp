@@ -5,7 +5,7 @@ export const onCreateBook = `subscription OnCreateBook {
   onCreateBOOK {
     id
     title
-    autor
+    author
     status
   }
 }
@@ -14,7 +14,7 @@ export const onUpdateBook = `subscription OnUpdateBook {
   onUpdateBOOK {
     id
     title
-    autor
+    author
     status
   }
 }
@@ -23,7 +23,7 @@ export const onDeleteBook = `subscription OnDeleteBook {
   onDeleteBOOK {
     id
     title
-    autor
+    author
     status
   }
 }
