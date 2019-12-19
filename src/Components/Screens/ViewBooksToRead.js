@@ -20,7 +20,7 @@ const ListBooksToRead = `query ListBooKs(
 `;
 class ViewBooksToReadScreen extends Component {
   static navigationOptions = {
-    title: 'Books to read',
+    title: 'Books List',
   };
   state = {
     books: [],
@@ -51,7 +51,7 @@ class ViewBooksToReadScreen extends Component {
             data={booksList}
             renderItem={({item}) => (
               <View style={styles.listItemCard}>
-                <Text style={styles.item}>{item.title}</Text>
+                <Text style={styles.item}>Title: {item.title}</Text>
                 <Text style={styles.item}>By: {item.author}</Text>
               </View>
             )}
