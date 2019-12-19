@@ -108,10 +108,14 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: '90%',
     fontSize: 20,
     borderBottomWidth: 2,
     borderBottomColor: 'blue',
     marginVertical: 10,
+    marginLeft: 20,
   },
 });
 

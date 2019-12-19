@@ -5,7 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import HomeScreen from './Components/Screens/Home';
 import AddBooksScreen from './Components/Screens/AddBooks';
 import ViewBooksToReadScreen from './Components/Screens/ViewBooksToRead';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
@@ -14,8 +14,9 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('ViewBooksToRead')}>
-          <Text>My Books List</Text>
+          onPress={() => navigation.navigate('ViewBooksToRead')}
+          style={{paddingRight: 20}}>
+          <Text style={{fontSize: 16, fontWeight: '600'}}>My List</Text>
         </TouchableOpacity>
       ),
     }),
