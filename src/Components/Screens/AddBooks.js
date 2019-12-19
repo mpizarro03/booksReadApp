@@ -16,7 +16,7 @@ const AddBook = `mutation ($title: String! $author: String $status: String!) {
 
 class AddBooksScreen extends Component {
   static navigationOptions = {
-    title: 'Add a book',
+    title: null,
   };
 
   state = {
@@ -34,6 +34,7 @@ class AddBooksScreen extends Component {
     this.setState(prevState => ({
       title: {...prevState.title, title: ''},
       author: {...prevState.author, author: ''},
+      isValid: {...prevState.isValid, isvalid: false},
     }));
   };
 
@@ -61,8 +62,8 @@ class AddBooksScreen extends Component {
   }
 
   render() {
-    const {navigate} = this.props.navigation;
     const {isValid} = this.state;
+
     return (
       <>
         <View style={styles.container}>
@@ -70,13 +71,13 @@ class AddBooksScreen extends Component {
             style={styles.input}
             value={this.state.title}
             onChangeText={val => this.onChangeText('title', val)}
-            placeholder="What do you want to read?"
+            placeholder="Book Title"
           />
           <TextInput
             style={styles.input}
             value={this.state.author}
             onChangeText={val => this.onChangeText('author', val)}
-            placeholder="Who wrote it?"
+            placeholder="Author"
           />
           <Button
             style={{fontSize: 20, color: 'white'}}

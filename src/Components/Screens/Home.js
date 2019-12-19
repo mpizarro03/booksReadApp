@@ -4,7 +4,7 @@ import Button from 'react-native-button';
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Books',
+    header: null,
   };
 
   render() {
@@ -21,8 +21,9 @@ class HomeScreen extends Component {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>
                 This is a place where you can keep track of books you want to
-                read. View the list of books you've added. Once you get around
-                to reading a book, make sure you mark it off as 'read'.
+                read. Enter the title and author on the next screen. Once you
+                get around to reading a book, make sure you mark it off as
+                'read'.
               </Text>
             </View>
           </View>
