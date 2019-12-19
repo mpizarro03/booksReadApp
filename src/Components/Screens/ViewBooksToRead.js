@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 import API, {graphqlOperation} from '@aws-amplify/api';
 
 const ListBooksToRead = `query ListBooKs(
@@ -29,8 +29,6 @@ class ViewBooksToReadScreen extends Component {
   async componentDidMount() {
     try {
       const books = await API.graphql(graphqlOperation(ListBooksToRead));
-      console.log('books', books);
-
       this.setState(prevState => ({
         books: {
           ...prevState.books,

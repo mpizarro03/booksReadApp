@@ -23,7 +23,7 @@ class AddBooksScreen extends Component {
     title: '',
     author: '',
     status: 'notRead',
-    isValid: false,
+    // isValid: false,
   };
 
   onChangeText = (key, val) => {
@@ -34,7 +34,7 @@ class AddBooksScreen extends Component {
     this.setState(prevState => ({
       title: {...prevState.title, title: ''},
       author: {...prevState.author, author: ''},
-      isValid: {...prevState.isValid, isvalid: false},
+      // isValid: {...prevState.isValid, isvalid: false},
     }));
   };
 
@@ -51,19 +51,16 @@ class AddBooksScreen extends Component {
     }
   };
 
-  componentDidUpdate(prevState) {
-    const {title, author, isValid} = this.state;
-
-    if (title.length > 0 && author.length > 0 && isValid === false) {
-      this.setState(prevState => ({
-        isValid: {...prevState.isValid, isValid: true},
-      }));
-    }
-  }
+  isValid = () => {
+    const valid =
+      this.state.title &&
+      this.state.title.length !== 0 &&
+      this.state.author &&
+      this.state.author.length !== 0;
+    return valid;
+  };
 
   render() {
-    const {isValid} = this.state;
-
     return (
       <>
         <View style={styles.container}>
@@ -93,7 +90,7 @@ class AddBooksScreen extends Component {
             disabledContainerStyle={{
               backgroundColor: 'lightgrey',
             }}
-            disabled={!isValid}>
+            disabled={!this.isValid()}>
             Add Book
           </Button>
         </View>
