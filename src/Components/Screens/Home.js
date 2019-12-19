@@ -29,7 +29,7 @@ class HomeScreen extends Component {
 
           <View style={styles.section}>
             <Text style={styles.sectionParagraph}>
-              Future features includes: ability to mark book as 'read'.
+              After you've read your book, make sure to mark it off as Read.
             </Text>
           </View>
           <Button
