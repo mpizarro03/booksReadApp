@@ -23,7 +23,7 @@ class AddBooksScreen extends Component {
     title: '',
     author: '',
     status: 'notRead',
-    // isValid: false,
+    isValid: false,
   };
 
   onChangeText = (key, val) => {
@@ -31,16 +31,11 @@ class AddBooksScreen extends Component {
   };
 
   clearForm = () => {
-    this.setState(prevState => ({
-      title: {...prevState.title, title: ''},
-      author: {...prevState.author, author: ''},
-      // isValid: {...prevState.isValid, isvalid: false},
-    }));
+    this.setState({title: '', author: ''});
   };
 
   addBook = async () => {
     const {title, author} = this.state;
-    if (title === '' || author === ' ') return;
     const book = {title: title, author: author, status: 'notRead'};
     try {
       await API.graphql(graphqlOperation(AddBook, book));
@@ -54,13 +49,14 @@ class AddBooksScreen extends Component {
   isValid = () => {
     const valid =
       this.state.title &&
-      this.state.title.length !== 0 &&
+      this.state.title.length &&
       this.state.author &&
-      this.state.author.length !== 0;
+      this.state.author.length;
     return valid;
   };
 
   render() {
+    this.isValid();
     return (
       <>
         <View style={styles.container}>
